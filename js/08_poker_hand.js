@@ -5,9 +5,9 @@
     // HINT: utilize the (conveniently named) images in the ./images/cards/
     //       directory to render each card in the hand.
     return `
-        <div class="text-center mt-5">
-            <code>${JSON.stringify(pokerHand)}</code>
-        </div>
+    <div>
+    <img src="images/cards/${pokerHand.value}${pokerHand.suit}.png" height="146" width="100"> 
+    </div>
     `
   }
 
@@ -38,5 +38,19 @@
 
   // Now that we have seen a few examples, try to write your own button click and
   // attach event handler code below.
+
+  const contentElement = document.getElementById('content')
+  const btnEl = document.getElementById('pokerHandsBtn')
+
+  function pokerHandsBtn () {
+    
+    contentElement.innerHTML = `
+      <div class="d-flex flex-row align-items-center justify-content-center">
+      ${pokerHandData.map(buildPokerHandHTML).join('')}
+      </div>
+      `
+  }
+
+  btnEl.addEventListener('click', pokerHandsBtn)
 
 })()

@@ -2,10 +2,23 @@
   // convert a movie JavaScript object to an HTML string
   function buildMovieHTML (movie) {
     // TODO: Your code goes here.
+    let percentConvert = movie.rottenTomatoesRating * 100;
     return `
-        <div class="text-center mt-5">
-            <code>${JSON.stringify(movie)}</code>
+    <div class="card mb-3" style="width: 550px; background-color: gray;">
+      <div class="row no-gutters">
+        <div class="col-md-4" style="padding: 10px;">
+          <img src="${movie.poster}" class="card-img" alt="...">
         </div>
+        <div class="col-md-8" style="background-color: lightgray;">
+          <div class="card-body">
+            <h3 class="card-title">${movie.title}</h3>
+            <p class="card-text"><small>${movie.year}</small></p>
+            <p class="card-text" style="font-size: 20px;">IMDB:<br>${movie.imdbRating}/10</p>
+            <p class="card-text" style="font-size: 20px;">Rotten Tomatoes:<br>${percentConvert}%</p>
+          </div>
+        </div>
+      </div>
+    </div>
     `
   }
 
@@ -40,5 +53,20 @@
 
   // Now that we have seen a few examples, try to write your own button click and
   // attach event handler code below.
+  const contentElement = document.getElementById('content')
+  const btnEl = document.getElementById('moviesBtn')
+
+  function moviesBtn () {
+    
+    contentElement.innerHTML = `
+      <div class="d-flex flex-column align-items-center justify-content-center">
+      ${moviesData.map(buildMovieHTML).join('')}
+      </div>
+      `
+  }
+
+  btnEl.addEventListener('click', moviesBtn)
+
+
 
 })()

@@ -42,3 +42,4 @@
   // attach the clickSquareBtn function to the <button id=squareBtn> element
   btnEl.addEventListener('click', clickSquareBtn)
 })()
+ 

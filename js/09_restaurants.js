@@ -2,10 +2,20 @@
   // convert a restaurant JavaScript object to an HTML string
   function buildRestaurantHTML (restaurant) {
     // TODO: Your code goes here.
+
+    let dollarSigns = "";
+    for (let i = 0; i < restaurant.priceRating; i++) {
+      dollarSigns = dollarSigns + "$";
+    }
+
     return `
-        <div class="text-center mt-5">
-            <code>${JSON.stringify(restaurant)}</code>
-        </div>
+    <div class="card">
+      <div class="card-body" style="text-align: left; width: 200px; background-color: lightgray; padding: 5px;">
+        <h3 class="card-title">${restaurant.name}</h3>
+        <h6>${restaurant.type}</h6>
+        <h4 style="color: green; font-weight: bold;">${dollarSigns}</h4>
+      </div>
+    </div>
     `
   }
 
@@ -31,5 +41,19 @@
 
   // Now that we have seen a few examples, try to write your own button click and
   // attach event handler code below.
+
+  const contentElement = document.getElementById('content')
+  const btnEl = document.getElementById('restaurantsBtn')
+
+  function restaurantsBtn () {
+    
+    contentElement.innerHTML = `
+      <div class="d-flex flex-row align-items-center justify-content-center">
+      ${restaurantsData.map(buildRestaurantHTML).join('')}
+      </div>
+      `
+  }
+
+  btnEl.addEventListener('click', restaurantsBtn)
 
 })()

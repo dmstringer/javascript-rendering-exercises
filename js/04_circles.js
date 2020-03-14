@@ -4,9 +4,13 @@
     // HINT: You can create a circle out of a <div> by using the border-radius CSS property
     // { background: blue, border-radius: 50%; }
     return `
-        <div class="text-center mt-5">
-            <code>${JSON.stringify(circle)}</code>
-        </div>
+    <div style="
+      height: ${circle.radius*2}px;
+      width: ${circle.radius*2}px;
+      border-radius: 50%;
+      background: ${circle.color};
+      ">
+    </div>
     `
   }
 

@@ -3,9 +3,14 @@
   function buildNametagHTML (nametag) {
     // TODO: Your code goes here.
     return `
-        <div class="text-center mt-5">
-            <code>${JSON.stringify(nametag)}</code>
-        </div>
+    <div class="card">
+      <div class="card-header" style="text-align: center; background-color: blue; color: white;">
+        Hello, my name is:
+      </div>
+      <div class="card-body" style="text-align: center;">
+        <h5 class="card-title">${nametag}</h5>
+      </div>
+    </div>
     `
   }
 
@@ -21,5 +26,18 @@
 
   // Now that we have seen a few examples, try to write your own button click and
   // attach event handler code below.
+  const contentElement = document.getElementById('content')
+  const btnEl = document.getElementById('nametagsBtn')
+
+  function clickNameTagsBtn () {
+    
+    contentElement.innerHTML = `
+      <div class="d-flex flex-column align-items-center">
+      ${nametagsData.map(buildNametagHTML).join('')}
+      </div>
+      `
+  }
+
+  btnEl.addEventListener('click', clickNameTagsBtn)
 
 })()

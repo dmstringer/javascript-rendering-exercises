@@ -5,9 +5,13 @@
     // HINT: draw an ellipse exactly like you would a rectangle, except add to
     //       the style "border-radius: 50%"
     return `
-        <div class="text-center mt-5">
-            <code>${JSON.stringify(ellipse)}</code>
-        </div>
+    <div style="
+      height: ${ellipse.height}px;
+      width: ${ellipse.width}px;
+      border-radius: 50%;
+      background: ${ellipse.color};
+      ">
+    </div>
     `
   }
 
@@ -44,6 +48,11 @@
     // Array and then put them into the <div id=content> element
 
     // TODO: your code goes here
+    contentElement.innerHTML = `
+      <div class="d-flex flex-column align-items-center">
+      ${ellipsesData.map(buildEllipseHTML).join('')}
+      </div>
+      `
   }
 
   // attach an event handler for button click
