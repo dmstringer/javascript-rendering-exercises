@@ -1,11 +1,50 @@
 ;(function () {
   // convert a survey JavaScript object to an HTML string
   function buildSurveyHTML (survey) {
-    // TODO: Your code goes here.
     return `
-        <div class="text-center mt-5">
-            <code>${JSON.stringify(survey)}</code>
-        </div>
+    <div class="d-flex flex-column align-items-left" style="width: 600px; margin: 20px;">
+      <div class="border-bottom border-secondary">
+        <h1>${survey.title}</h1>
+      </div>
+      <div class="justify-content-start">
+        <form>
+          ${survey.fields.map(buildFieldsHTML).join('')}
+          <button type="submit" class="btn btn-primary mt-3">${survey.submitButtonText}</button>
+        </form>
+      </div>
+    </div>
+    `
+  }
+
+  function buildFieldsHTML (field) {
+
+    if (field.type === "text") {
+      return `
+    <div class="form-group">
+      <label for="textField" style="margin-top: 10px;">${field.label}</label>
+      <textarea class="form-control" id="" rows="3">¯&#92;_(ツ)_/¯</textarea>
+    </div>
+    `
+    } else {
+      return `
+      <label for="textField" style="margin-top: 10px;">${field.label}</label>
+      ${field.options.map(buildOptionsHTML).join('')}
+    `
+    }
+  }
+
+  function buildOptionsHTML (option) {
+    let newOption = '';
+    if ((typeof option) === "string") {
+      newOption = option.charAt(0).toUpperCase() + option.substring(1);
+    }else {
+      newOption = String(option);
+    }
+    return `
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="fieldOptions" id="fieldOption${option}" value="option${option}">
+      <label class="form-check-label" for="fieldOption${option}">${newOption}</label>
+    </div>
     `
   }
 
@@ -59,5 +98,19 @@
 
   // Now that we have seen a few examples, try to write your own button click and
   // attach event handler code below.
+
+  const contentElement = document.getElementById('content')
+  const btnEl = document.getElementById('surveysBtn')
+
+  function surveysBtn () {
+    
+    contentElement.innerHTML = `
+      <div class="d-flex flex-column align-items-center justify-content-center">
+      ${surveysData.map(buildSurveyHTML).join('')}
+      </div>
+      `
+  }
+
+  btnEl.addEventListener('click', surveysBtn)
 
 })()

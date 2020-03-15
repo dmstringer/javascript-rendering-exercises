@@ -3,9 +3,34 @@
   function buildBandHTML (band) {
     // TODO: Your code goes here.
     return `
-        <div class="text-center mt-5">
-            <code>${JSON.stringify(band)}</code>
-        </div>
+    <div class="d-flex flex-column rounded" style="width: 600px; margin: 20px; padding: 20px; background: lightgrey;">
+      <div class="border-bottom border-secondary mb-3">
+        <h1>${band.artist.toUpperCase()}</h1>
+      </div>
+      ${band.albums.map(buildAlbumsHTML).join('')}
+    </div>
+    `
+  }
+
+  function buildAlbumsHTML (album) {
+    return `
+    <div class="d-flex flex-column" style="margin-bottom: 20px;">
+      <div class="media border-bottom border-secondary mt-2">
+        <img src="${album.coverArt}" class="mr-3 mb-3" style="width: 50px; height: 50px;">
+        <div class="media-body"><h3 class="mt-0">${album.title}</h3></div>
+      </div>
+      ${album.songs.map(buildSongListHTML).join('')}
+    </div>
+    `
+  }
+
+  function buildSongListHTML (song) {
+    return `
+    <div class="d-flex flex-row border-bottom border-secondary mt-3">
+      <div><img src="images/icons/playbutton.png" style="width: 20px; height: 20px; margin: 0px 10px 0px 10px;"></div>  
+      <div class="flex-grow-1"><h5>${song.title}</h5></div>
+      <div class="ml-auto">${song.length}</div>
+    </div>
     `
   }
 
@@ -191,5 +216,19 @@
 
   // Now that we have seen a few examples, try to write your own button click and
   // attach event handler code below.
+
+  const contentElement = document.getElementById('content')
+  const btnEl = document.getElementById('bandsBtn')
+
+  function bandsBtn () {
+    
+    contentElement.innerHTML = `
+      <div class="d-flex flex-column align-items-center justify-content-center">
+      ${bandsData.map(buildBandHTML).join('')}
+      </div>
+      `
+  }
+
+  btnEl.addEventListener('click', bandsBtn)
 
 })()

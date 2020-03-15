@@ -66,7 +66,7 @@
   }
 
   btnEl.addEventListener('click', moviesBtn)
-
+ 
 
 
 })()
